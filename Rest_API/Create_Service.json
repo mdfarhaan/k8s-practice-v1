@@ -1,0 +1,23 @@
+{
+  "url": "http://localhost:8080/api/v1/namespaces/default/services",
+  "method": "POST",
+  "body": {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+      "name": "apiv3-service"
+    },
+    "spec": {
+      "selector": {
+        "app": "apiv3"
+      },
+      "ports": [
+        {
+          "protocol": "TCP",
+          "port": 3002,
+          "targetPort": 3002
+        }
+      ]
+    }
+  }
+}
