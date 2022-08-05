@@ -1,24 +1,39 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-local
+  name: ingress-v1
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "mdf.com"
 spec:
   ingressClassName: nginx
   rules:
-  - host: kubernetes.docker.internal
-    http:
-      paths:
-      - path: /api/v1
-        pathType: Prefix
-        backend:
-          service:
-            name: apiv1-service
-            port: 
-              number: 3000
-      - path: /api/v2
-        pathType: Prefix
-        backend:
-          service:
-            name: apiv2-service
-            port: 
-              number: 3001
+    - host: "v1.mdf.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: apiv1-service
+                port:
+                  number: 3000
+    - host: "v2.mdf.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: apiv2-service
+                port:
+                  number: 3001
+    - host: "v3.mdf.com"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: apiv3-service
+                port:
+                  number: 3002
